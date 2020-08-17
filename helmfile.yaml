@@ -1,0 +1,23 @@
+environments:
+  # The "default" environment is available and used when `helmfile` is run without `--environment NAME`.
+  #
+  # these values are available to any values.yaml.gotmpl files but they are not passed into 
+  # the helm charts directly
+  default:
+    values:
+    - jx-values.yaml
+    - src/fake-secrets.yaml.gotmpl
+releases:
+- chart: jenkins-x/jxboot-helmfile-resources
+  values:
+  - charts/jenkins-x/jxboot-helmfile-resources/values.yaml
+- chart: external-secrets/kubernetes-external-secrets
+- chart: jx-labs/jenkins-x-crds
+- chart: stable/nginx-ingress
+- chart: jenkins-x/tekton
+- chart: jenkins-x/lighthouse
+- chart: jenkins-x/bucketrepo
+- chart: stable/docker-registry
+- chart: banzaicloud-stable/vault-operator
+- chart: jx-labs/vault-instance
+- chart: jx-labs/pusher-wave

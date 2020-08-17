@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+    name: git-operator
+upstream:
+    type: git
+    git:
+        commit: 5ef5d0f19af8939f9d3c002aba7ef4d5d64348a2
+        repo: https://github.com/jenkins-x/jx3-gitops-template
+        directory: /.jx/git-operator
+        ref: master
