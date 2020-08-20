@@ -21,7 +21,13 @@ init:
 .PHONY: fetch
 fetch: init
 	# lets configure the cluster gitops repository URL on the requirements if its missing
-	jx gitops repository --source-dir $(OUTPUT_DIR)/namespaces
+	jx gitops repository resolve --source-dir $(OUTPUT_DIR)/namespaces
+
+	# lets create any missing SourceRepository defined in .jx/gitops/source-config.yaml which are not in: src/base/namespaces/jx/source-repositories
+	jx gitops repository create
+
+	# set any missing defaults in the secrets mapping file
+	jx secret convert edit
 
 	# lets resolve chart versions and values from the version stream
 	jx gitops helmfile resolve
