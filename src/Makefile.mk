@@ -5,8 +5,11 @@ OUTPUT_DIR := config-root
 VAULT_ADDR ?= https://vault.secret-infra:8200
 
 # NOTE to enable debug logging of 'helmfile template' to diagnose any issues with values.yaml templating
-# change this line to:
+# you can run:
 #
+#     export HELMFILE_TEMPLATE_FLAGS="--debug"
+#
+# or change the next line to:
 # HELMFILE_TEMPLATE_FLAGS ?= --debug
 HELMFILE_TEMPLATE_FLAGS ?=
 
@@ -45,15 +48,8 @@ fetch: init
 	# this line avoids the next helmfile command failing...
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
-	# generate the yaml from the charts in helmfile.yaml
-	helmfile $(HELMFILE_TEMPLATE_FLAGS) template  -args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(TMP_TEMPLATE_DIR)
-
-	# split the files into one file per resource
-	jx gitops split --dir $(TMP_TEMPLATE_DIR)
-
-	# move the templated files to correct cluster or namespace folder
-	# setting the namespace on namespaced resources
-	jx gitops helmfile move --dir $(TMP_TEMPLATE_DIR) --output-dir $(OUTPUT_DIR)
+	# generate the yaml from the charts in helmfile.yaml and moves them to the right directory tree (cluster or namespaces/foo)
+	jx gitops helmfile template $(HELMFILE_TEMPLATE_FLAGS) --args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(OUTPUT_DIR)
 
 	# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
 	# see: https://github.com/jenkins-x/jx-secret#mappings
