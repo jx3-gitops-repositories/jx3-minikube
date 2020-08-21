@@ -4,6 +4,12 @@ OUTPUT_DIR := config-root
 
 VAULT_ADDR ?= https://vault.secret-infra:8200
 
+# NOTE to enable debug logging of 'helmfile template' to diagnose any issues with values.yaml templating
+# change this line to:
+#
+# HELMFILE_TEMPLATE_FLAGS ?= --debug
+HELMFILE_TEMPLATE_FLAGS ?=
+
 .PHONY: clean
 clean:
 	rm -rf build $(OUTPUT_DIR)
@@ -39,7 +45,7 @@ fetch: init
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
 	# generate the yaml from the charts in helmfile.yaml
-	helmfile --debug template  -args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(TMP_TEMPLATE_DIR)
+	helmfile $(HELMFILE_TEMPLATE_FLAGS) template  -args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(TMP_TEMPLATE_DIR)
 
 	# split the files into one file per resource
 	jx gitops split --dir $(TMP_TEMPLATE_DIR)
@@ -79,7 +85,14 @@ post-build:
 	jx gitops scheduler -d config-root/namespaces/jx -o src/base/namespaces/jx/lighthouse-config
 	# TODO do we need this?
 	#jx gitops ingress
-	jx gitops label --dir $(OUTPUT_DIR) gitops.jenkins-x.io/pipeline=environment
+
+	# lets add the kubectl-apply prune annotations
+	#
+	# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
+	jx gitops label --dir $(OUTPUT_DIR)/cluster    gitops.jenkins-x.io/pipeline=cluster
+	jx gitops label --dir $(OUTPUT_DIR)/namespaces gitops.jenkins-x.io/pipeline=namespaces
+
+
 	jx gitops annotate --dir  $(OUTPUT_DIR)/namespaces --kind Deployment wave.pusher.com/update-on-config-change=true
 
 	# lets force a rolling upgrade of lighthouse pods whenever we update the lighthouse config...
@@ -137,22 +150,21 @@ git-setup:
 
 .PHONY: regen-check
 regen-check:
-	jx gitops condition --last-commit-msg-prefix '!Merge pull request' -- make git-setup resolve-metadata all double-apply verify-ingress-ignore commit push
+	jx gitops condition --last-commit-msg-prefix '!Merge pull request' -- make git-setup resolve-metadata all kubectl-apply verify-ingress-ignore commit push
 
 	# lets run this twice to ensure that ingress is setup after applying nginx if not using a custom domain yet
 	jx gitops condition --last-commit-msg-prefix '!Merge pull request' -- make verify-ingress-ignore all verify-ignore secrets-populate commit push secrets-wait
 
 .PHONY: apply
-apply: regen-check
-	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=environment -R -f $(OUTPUT_DIR)
+apply: regen-check kubectl-apply
 	-jx verify env
 	-jx verify webhooks --verbose --warn-on-fail
 
-.PHONY: double-apply
-double-apply: 
-	# TODO has a hack lets do this twice as the first time fails due to CRDs
-	-kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=environment -R -f $(OUTPUT_DIR)
-	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=environment -R -f $(OUTPUT_DIR)
+.PHONY: kubectl-apply
+kubectl-apply:
+	# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
+	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=cluster    -R -f $(OUTPUT_DIR)/cluster
+	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=namespaces -R -f $(OUTPUT_DIR)/namespaces
 
 .PHONY: resolve-metadata
 resolve-metadata:
