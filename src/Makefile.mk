@@ -14,23 +14,24 @@ HELMFILE_TEMPLATE_FLAGS ?=
 clean:
 	rm -rf build $(OUTPUT_DIR)
 
-init:
+.PHONY: setup
+setup:
+	# lets create any missing SourceRepository defined in .jx/gitops/source-config.yaml which are not in: src/base/namespaces/jx/source-repositories
+	jx gitops repository create
+
+.PHONY: init
+init: setup
 	mkdir -p $(FETCH_DIR)
 	mkdir -p $(TMP_TEMPLATE_DIR)
 	mkdir -p $(OUTPUT_DIR)/namespaces/jx
 	cp -r src/* build
 	mkdir -p $(FETCH_DIR)/cluster/crds
-	#mkdir -p $(FETCH_DIR)/namespaces/nginx
-	#mkdir -p $(FETCH_DIR)/namespaces/jx-cli:0.0.330
 
 
 .PHONY: fetch
 fetch: init
 	# lets configure the cluster gitops repository URL on the requirements if its missing
 	jx gitops repository resolve --source-dir $(OUTPUT_DIR)/namespaces
-
-	# lets create any missing SourceRepository defined in .jx/gitops/source-config.yaml which are not in: src/base/namespaces/jx/source-repositories
-	jx gitops repository create
 
 	# set any missing defaults in the secrets mapping file
 	jx secret convert edit
@@ -41,7 +42,7 @@ fetch: init
 	# lets make sure we are using the latest jx-cli in the git operator Job
 	jx gitops image -s .jx/git-operator
 
-	# not sure why we need this but it avoids issues...
+	# this line avoids the next helmfile command failing...
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
 	# generate the yaml from the charts in helmfile.yaml
@@ -57,13 +58,6 @@ fetch: init
 	# convert k8s Secrets => ExternalSecret resources using secret mapping + schemas
 	# see: https://github.com/jenkins-x/jx-secret#mappings
 	jx secret convert --dir $(OUTPUT_DIR)
-
-	# old approach
-	#jx gitops jx-apps template --template-values src/fake-secrets.yaml.txt -o $(OUTPUT_DIR)/namespaces
-	#jx gitops namespace --dir-mode --dir $(OUTPUT_DIR)/namespaces
-
-	# disable cert manager validation of webhooks due to cert issues
-	#jx gitops label --kind Namespace cert-manager.io/disable-validation=true
 
 .PHONY: build
 # uncomment this line to enable kustomize
@@ -82,9 +76,8 @@ pre-build:
 
 .PHONY: post-build
 post-build:
+	# lets generate the lighthouse configuration
 	jx gitops scheduler -d config-root/namespaces/jx -o src/base/namespaces/jx/lighthouse-config
-	# TODO do we need this?
-	#jx gitops ingress
 
 	# lets add the kubectl-apply prune annotations
 	#
@@ -92,7 +85,8 @@ post-build:
 	jx gitops label --dir $(OUTPUT_DIR)/cluster    gitops.jenkins-x.io/pipeline=cluster
 	jx gitops label --dir $(OUTPUT_DIR)/namespaces gitops.jenkins-x.io/pipeline=namespaces
 
-
+	# lets enable pusher-wave to perform rolling updates of any Deployment when its underlying Secrets get modified
+	# by modifying the underlying secret store (e.g. vault / GSM / ASM) which then causes External Secrets to modify the k8s Secrets
 	jx gitops annotate --dir  $(OUTPUT_DIR)/namespaces --kind Deployment wave.pusher.com/update-on-config-change=true
 
 	# lets force a rolling upgrade of lighthouse pods whenever we update the lighthouse config...
@@ -165,6 +159,9 @@ kubectl-apply:
 	# NOTE be very careful about these 2 labels as getting them wrong can remove stuff in you cluster!
 	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=cluster    -R -f $(OUTPUT_DIR)/cluster
 	kubectl apply --prune -l=gitops.jenkins-x.io/pipeline=namespaces -R -f $(OUTPUT_DIR)/namespaces
+
+	# lets apply any infrastructure specific labels or annotations to enable IAM roles on ServiceAccounts etc
+	jx gitops postprocess
 
 .PHONY: resolve-metadata
 resolve-metadata:
