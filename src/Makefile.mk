@@ -45,7 +45,6 @@ fetch: init
 	helm repo add jx http://chartmuseum.jenkins-x.io
 
 	# generate the yaml from the charts in helmfile.yaml
-	helmfile --debug template  -args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(TMP_TEMPLATE_DIR)
 	helmfile $(HELMFILE_TEMPLATE_FLAGS) template  -args="--include-crds --values=jx-values.yaml --values=src/fake-secrets.yaml.gotmpl" --output-dir $(TMP_TEMPLATE_DIR)
 
 	# split the files into one file per resource
