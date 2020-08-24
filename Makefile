@@ -1,1 +1,1 @@
-include src/Makefile.mk
+include versionStream/src/Makefile.mk
