@@ -116,6 +116,9 @@ $GITOPS_BIN/configure.sh
 # lets create the cluster
 $GITOPS_BIN/create.sh
 
+# lets add some testing charts....
+jx gitops helmfile add --chart jx3/jx-test-collector
+
 # lets add / commit any cloud resource specific changes
 git add * || true
 git commit -a -m "chore: cluster changes" || true

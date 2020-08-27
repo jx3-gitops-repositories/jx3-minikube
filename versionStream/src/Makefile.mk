@@ -124,7 +124,7 @@ verify-ignore: verify-ingress-ignore
 
 .PHONY: secrets-populate
 secrets-populate:
-	# lets populate any missing secrets we have a generator defined for in the `.jx/gitops/secret-schema.yaml` file
+	# lets populate any missing secrets we have a generator in `charts/$repoName/$chartName/secret-schema.yaml`
 	# they can be modified/regenerated at any time via `jx secret edit`
 	-VAULT_ADDR=$(VAULT_ADDR) jx secret populate
 
