@@ -85,6 +85,7 @@ jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-st
 
 export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
+echo "going to clone git repo $GITOPS_REPO"
 
 if [ -z "$NO_JX_TEST" ]
 then
@@ -103,6 +104,7 @@ git clone $GITOPS_REPO
 cd env-${CLUSTER_NAME}-dev
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
+rm -rf versionStream
 cp -R ../source versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
