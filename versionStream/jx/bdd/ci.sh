@@ -97,6 +97,8 @@ else
       echo "not using jx-test to gc old tests"
 fi
 
+export SOURCE_DIR=`pwd`
+
 # avoid cloning cluster repo into the working CI folder
 cd ..
 
@@ -105,7 +107,7 @@ cd env-${CLUSTER_NAME}-dev
 
 # use the changes from this PR in the version stream for the cluster repo when resolving the helmfile
 rm -rf versionStream
-cp -R ../source versionStream
+cp -R $SOURCE_DIR versionStream
 rm -rf versionStream/.git versionStream/.github
 git add versionStream/
 
