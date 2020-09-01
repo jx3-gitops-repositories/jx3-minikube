@@ -26,6 +26,10 @@ jx secret --help
 
 
 
+if [ -z "$GIT_USERNAME" ]
+then
+    export GIT_USERNAME="jenkins-x-labs-bot"
+fi
 
 export GIT_USERNAME="jenkins-x-labs-bot"
 export GIT_USER_EMAIL="jenkins-x@googlegroups.com"
@@ -35,7 +39,7 @@ export GIT_TOKEN="${GH_ACCESS_TOKEN//[[:space:]]}"
 
 if [ -z "$GIT_TOKEN" ]
 then
-      echo "ERROR: no GH_ACCESS_TOKEN env var defined for bdd/ci.sh"
+      echo "ERROR: no GIT_TOKEN env var defined for bdd/ci.sh"
 else
       echo "has valid git token in bdd/ci.sh"
 fi
@@ -81,7 +85,7 @@ echo "using GitOps template: $GITOPS_TEMPLATE_URL version: $GITOPS_TEMPLATE_VERS
 #git clone -b v${GITOPS_TEMPLATE_VERSION} $GITOPS_TEMPLATE_URL
 
 # create the boot git repository to mimic creating the git repository via the github create repository wizard
-jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator
+jx admin create -b --initial-git-url $GITOPS_TEMPLATE_URL --env dev --version-stream-ref=$PULL_PULL_SHA --version-stream-url=${PR_SOURCE_URL//[[:space:]]} --env-git-owner=$GH_OWNER --repo env-$CLUSTER_NAME-dev --no-operator $JX_ADMIN_CREATE_ARGS
 
 export GITOPS_REPO=https://${GIT_USERNAME//[[:space:]]}:${GIT_TOKEN}@github.com/${GH_OWNER}/env-${CLUSTER_NAME}-dev.git
 
