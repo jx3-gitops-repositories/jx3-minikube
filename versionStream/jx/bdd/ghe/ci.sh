@@ -12,8 +12,13 @@ export GITOPS_TEMPLATE_PROJECT="jx3-gitops-repositories/jx3-gke-terraform-vault"
 #export RUN_TEST="bddjx -ginkgo.focus=spring-boot-http-gradle -test.v"
 
 
+export GIT_USERNAME="dev1"
+export GH_OWNER="${GIT_USERNAME}"
+
+export GIT_SERVER_HOST="github.beescloud.com"
+
 # lets default to using github enterprise
-export JX_ADMIN_CREATE_ARGS="--git-name ghe --git-server https://github.beescloud.com --env-git-owner dev1"
+export JX_ADMIN_CREATE_ARGS="--git-name ghe --git-server https://${GIT_SERVER_HOST} --env-git-owner ${GIT_USERNAME}"
 
 
 `dirname "$0"`/../ci.sh

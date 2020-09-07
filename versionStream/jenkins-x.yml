@@ -35,11 +35,11 @@ pipelineConfig:
             - ${VERSION}
             - --rev
             - "v${VERSION}"
-          - name: update-bot-fork
-            command: ./jx/scripts/update-bot-fork.sh
           - name: promote-vs
             command: ./jx/scripts/promote-vs.sh
-            image: gcr.io/jenkinsxio/jx-cli:3.0.52
+            image: gcr.io/jenkinsxio/jx-cli:3.0.152
+          - name: update-bot-fork
+            command: ./jx/scripts/update-bot-fork.sh
           - name: release-resources
             command: ./jx/scripts/release-resources.sh
             image: gcr.io/jenkinsxio-labs-private/jx-gitops
@@ -48,7 +48,7 @@ pipelineConfig:
           - name: update-jx-bot
             command: ./jx/scripts/update-jx-bot.sh
           - name: update-jx-website
-            image: gcr.io/jenkinsxio/builder-go:2.1.100-729
+            image: gcr.io/jenkinsxio/builder-go:2.1.142-761
             command: ./jx/scripts/update-jx-website.sh
     pullRequest:
       pipeline:
