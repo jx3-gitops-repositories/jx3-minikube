@@ -29,5 +29,5 @@ pipelineConfig:
         - name: ci
           steps:
           - command: jx/bdd/terraform/ci.sh
-            image: gcr.io/jenkinsxio/jx-cli:3.0.178
+            image: gcr.io/jenkinsxio/jx-cli:3.0.180
             name: runci
