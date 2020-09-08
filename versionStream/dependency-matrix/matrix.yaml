@@ -489,7 +489,7 @@ dependencies:
   owner: jenkins-x
   repo: jxr-packs-kubernetes
   url: https://github.com/jenkins-x/jxr-packs-kubernetes
-  version: 0.0.42
+  version: 0.0.43
   versionURL: ""
 - host: github.com
   owner: jenkins-x
@@ -585,8 +585,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-cli
   url: https://github.com/jenkins-x/jx-cli
-  version: 3.0.174
-  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v3.0.174
+  version: 3.0.178
+  versionURL: https://github.com/jenkins-x/jx-cli/releases/tag/v3.0.178
 - host: github.com
   owner: jenkins-x
   repo: jx-project
@@ -621,8 +621,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-preview
   url: https://github.com/jenkins-x/jx-preview
-  version: 0.0.34
-  versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.34
+  version: 0.0.36
+  versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.36
 - host: github.com
   owner: jenkins-x
   repo: jx-test
