@@ -81,7 +81,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.190](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.190) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.78](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.78) | 
-[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.77](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.77) | 
+[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.81](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.81) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.75](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.75) | 
@@ -91,6 +91,6 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/jx-pipeline](https://github.com/jenkins-x/jx-pipeline) |  | [0.0.14](https://github.com/jenkins-x/jx-pipeline/releases/tag/v0.0.14) | 
 [jenkins-x/jx-application](https://github.com/jenkins-x/jx-application) |  | [0.0.10](https://github.com/jenkins-x/jx-application/releases/tag/v0.0.10) | 
 [jenkins-x/jx-secret](https://github.com/jenkins-x/jx-secret) |  | [0.0.80](https://github.com/jenkins-x/jx-secret/releases/tag/v0.0.80) | 
-[jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.28](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.28) | 
+[jenkins-x/jx-preview](https://github.com/jenkins-x/jx-preview) |  | [0.0.32](https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.32) | 
 [jenkins-x/jx-test](https://github.com/jenkins-x/jx-test) |  | [0.0.18](https://github.com/jenkins-x/jx-test/releases/tag/v0.0.18) | 
 [jenkins-x/step-go-releaser](https://github.com/jenkins-x/step-go-releaser) |  | [0.0.14]() | 

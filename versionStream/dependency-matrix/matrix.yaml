@@ -561,8 +561,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-git-operator
   url: https://github.com/jenkins-x/jx-git-operator
-  version: 0.0.77
-  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.77
+  version: 0.0.81
+  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.81
 - host: github.com
   owner: jenkins-x
   repo: jx-extsecret
@@ -621,8 +621,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-preview
   url: https://github.com/jenkins-x/jx-preview
-  version: 0.0.28
-  versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.28
+  version: 0.0.32
+  versionURL: https://github.com/jenkins-x/jx-preview/releases/tag/v0.0.32
 - host: github.com
   owner: jenkins-x
   repo: jx-test
