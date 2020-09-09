@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: 034e2021656a20d133fd15dd03cba444c4f65656
+    commit: 18f5218729b4be6d62bb184a8cda7da38d24d4e8
     repo: https://github.com/jenkins-x/jxr-versions
     directory: /
     ref: master
