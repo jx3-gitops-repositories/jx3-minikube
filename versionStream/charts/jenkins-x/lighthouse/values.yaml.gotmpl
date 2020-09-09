@@ -25,7 +25,9 @@ vault:
   enabled: false
 {{- end }}
 
+{{- if hasKey .Values.jxRequirements.cluster "clusterName" }}
 clusterName: "{{ .Values.jxRequirements.cluster.clusterName }}"
+{{- end }}
 
 {{- if and (hasKey .Values.jxRequirements "pipelineUser") (hasKey .Values.jxRequirements.pipelineUser "username") }}
 user: "{{ .Values.jxRequirements.pipelineUser.username }}"
