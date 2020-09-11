@@ -489,7 +489,7 @@ dependencies:
   owner: jenkins-x
   repo: jxr-packs-kubernetes
   url: https://github.com/jenkins-x/jxr-packs-kubernetes
-  version: 0.0.43
+  version: 0.0.47
   versionURL: ""
 - host: github.com
   owner: jenkins-x
@@ -561,8 +561,8 @@ dependencies:
   owner: jenkins-x
   repo: jx-git-operator
   url: https://github.com/jenkins-x/jx-git-operator
-  version: 0.0.81
-  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.81
+  version: 0.0.83
+  versionURL: https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.83
 - host: github.com
   owner: jenkins-x
   repo: jx-extsecret

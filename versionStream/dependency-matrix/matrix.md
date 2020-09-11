@@ -69,7 +69,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x-labs/istio](https://github.com/jenkins-x-labs/istio) |  | [0.0.21]() | 
 [jenkins-x/jxl](https://github.com/jenkins-x/jxl) |  | [0.0.208]() | 
 [jenkins-x-labs/cloud-resources](https://github.com/jenkins-x-labs/cloud-resources) |  | [0.0.31]() | 
-[jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.43]() | 
+[jenkins-x/jxr-packs-kubernetes](https://github.com/jenkins-x/jxr-packs-kubernetes) |  | [0.0.47]() | 
 [jenkins-x/helm-annotate](https://github.com/jenkins-x/helm-annotate) |  | [0.0.13]() | 
 [godaddy/kubernetes-external-secrets](https://github.com/godaddy/kubernetes-external-secrets) |  | [4.0.0]() | 
 [jenkins-x/charts](https://github.com/jenkins-x/charts) |  | [1.1.7]() | 
@@ -81,7 +81,7 @@ Dependency | Sources | Version | Mismatched versions
 [jenkins-x/istio](https://github.com/jenkins-x/istio) |  | [0.1.1]() | 
 [jenkins-x/jx-gitops](https://github.com/jenkins-x/jx-gitops) |  | [0.0.190](https://github.com/jenkins-x/jx-gitops/releases/tag/v0.0.190) | 
 [jenkins-x/jx-promote](https://github.com/jenkins-x/jx-promote) |  | [0.0.78](https://github.com/jenkins-x/jx-promote/releases/tag/v0.0.78) | 
-[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.81](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.81) | 
+[jenkins-x/jx-git-operator](https://github.com/jenkins-x/jx-git-operator) |  | [0.0.83](https://github.com/jenkins-x/jx-git-operator/releases/tag/v0.0.83) | 
 [jenkins-x/jx-extsecret](https://github.com/jenkins-x/jx-extsecret) |  | [0.0.18](https://github.com/jenkins-x/jx-extsecret/releases/tag/v0.0.18) | 
 [jenkins-x/jxr-versions](https://github.com/jenkins-x/jxr-versions) |  | [0.0.46](https://github.com/jenkins-x/jxr-versions/releases/tag/v0.0.46) | 
 [jenkins-x/jx-admin](https://github.com/jenkins-x/jx-admin) |  | [0.0.75](https://github.com/jenkins-x/jx-admin/releases/tag/v0.0.75) | 

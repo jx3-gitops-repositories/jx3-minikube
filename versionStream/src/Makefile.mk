@@ -81,6 +81,9 @@ post-build:
 	jx gitops label --dir $(OUTPUT_DIR)/cluster    gitops.jenkins-x.io/pipeline=cluster
 	jx gitops label --dir $(OUTPUT_DIR)/namespaces gitops.jenkins-x.io/pipeline=namespaces
 
+	# lets label all Namespace resources with the main namespace which creates them and contains the Environment resources
+	jx gitops label --dir $(OUTPUT_DIR)/cluster --kind=Namespace team=jx
+
 	# lets enable pusher-wave to perform rolling updates of any Deployment when its underlying Secrets get modified
 	# by modifying the underlying secret store (e.g. vault / GSM / ASM) which then causes External Secrets to modify the k8s Secrets
 	jx gitops annotate --dir  $(OUTPUT_DIR)/namespaces --kind Deployment wave.pusher.com/update-on-config-change=true
