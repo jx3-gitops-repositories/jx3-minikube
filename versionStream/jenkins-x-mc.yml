@@ -29,5 +29,5 @@ pipelineConfig:
         - name: ci
           steps:
           - command: jx/bdd/mc/ci.sh
-            image: gcr.io/jenkinsxio/jx-cli:3.0.226
+            image: gcr.io/jenkinsxio/jx-cli:3.0.238
             name: runci
