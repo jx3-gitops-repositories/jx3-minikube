@@ -25,7 +25,7 @@ releases:
 - chart: external-secrets/kubernetes-external-secrets
 - chart: jx-labs/jenkins-x-crds
 - chart: jx3/jx-preview
-- chart: cdf/tekton-pipelines
+- chart: cdf/tekton-pipeline
 - chart: jenkins-x/lighthouse
 - chart: jenkins-x/bucketrepo
 - chart: stable/docker-registry
