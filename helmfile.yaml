@@ -7,6 +7,17 @@ environments:
     values:
     - jx-values.yaml
     - versionStream/src/fake-secrets.yaml.gotmpl
+repositories:
+- name: doesnotexist
+  url: https://storage.googleapis.com/chartmuseum.jenkins-x.io
+- name: cdf
+  url: https://cdfoundation.github.io/tekton-helm-chart
+- name: jenkins-x
+  url: https://storage.googleapis.com/chartmuseum.jenkins-x.io
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: external-secrets
+  url: https://godaddy.github.io/kubernetes-external-secrets
 releases:
 - chart: jenkins-x/jxboot-helmfile-resources
   values:
@@ -14,7 +25,7 @@ releases:
 - chart: external-secrets/kubernetes-external-secrets
 - chart: jx-labs/jenkins-x-crds
 - chart: jx3/jx-preview
-- chart: jenkins-x/tekton
+- chart: cdf/tekton-pipelines
 - chart: jenkins-x/lighthouse
 - chart: jenkins-x/bucketrepo
 - chart: stable/docker-registry
