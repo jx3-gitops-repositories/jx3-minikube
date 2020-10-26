@@ -50,7 +50,7 @@ releases:
   values:
   - versionStream/charts/jx3/jx-pipelines-visualizer/values.yaml.gotmpl
 - chart: jx3/jx-preview
-  version: 0.0.90
+  version: 0.0.113
   name: jx-preview
   namespace: jx
 - chart: cdf/tekton-pipeline
@@ -60,7 +60,7 @@ releases:
   values:
   - versionStream/charts/cdf/tekton-pipeline/values.yaml.gotmpl
 - chart: jenkins-x/lighthouse
-  version: 0.0.851
+  version: 0.0.857
   name: lighthouse
   namespace: jx
   values:
