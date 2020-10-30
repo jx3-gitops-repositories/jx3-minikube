@@ -89,7 +89,7 @@ releases:
   name: pusher-wave
   namespace: secret-infra
 - chart: jx3/jx-build-controller
-  version: 0.0.13
+  version: 0.0.14
   name: jx-build-controller
   namespace: jx
   values:
