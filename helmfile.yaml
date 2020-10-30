@@ -88,5 +88,8 @@ releases:
   version: 1.0.0
   name: pusher-wave
   namespace: secret-infra
+- chart: jx3/jx-build-controller
+  name: jx-build-controller
+  namespace: jx
 templates: {}
 missingFileHandler: ""
