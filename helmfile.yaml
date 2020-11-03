@@ -44,7 +44,7 @@ releases:
   values:
   - versionStream/charts/jx-labs/jenkins-x-crds/values.yaml
 - chart: jx3/jx-pipelines-visualizer
-  version: 0.0.51
+  version: 0.0.52
   name: jx-pipelines-visualizer
   namespace: jx
   values:
