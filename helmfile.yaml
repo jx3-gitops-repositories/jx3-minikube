@@ -54,13 +54,13 @@ releases:
   name: jx-preview
   namespace: jx
 - chart: cdf/tekton-pipeline
-  version: 0.17.1
+  version: 0.17.3
   name: tekton-pipeline
   namespace: tekton-pipelines
   values:
   - versionStream/charts/cdf/tekton-pipeline/values.yaml.gotmpl
 - chart: jenkins-x/lighthouse
-  version: 0.0.870
+  version: 0.0.873
   name: lighthouse
   namespace: jx
   values:
