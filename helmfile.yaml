@@ -27,68 +27,95 @@ releases:
   values:
   - charts/jenkins-x/jxboot-helmfile-resources/values.yaml
   - versionStream/charts/jenkins-x/jxboot-helmfile-resources/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: external-secrets/kubernetes-external-secrets
   version: 5.2.0
   name: kubernetes-external-secrets
   namespace: secret-infra
   values:
   - versionStream/charts/external-secrets/kubernetes-external-secrets/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/jenkins-x-crds
   version: 3.0.5
   name: jenkins-x-crds
   namespace: jx
   values:
   - versionStream/charts/jx3/jenkins-x-crds/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/jx-pipelines-visualizer
   version: 0.0.52
   name: jx-pipelines-visualizer
   namespace: jx
   values:
   - versionStream/charts/jx3/jx-pipelines-visualizer/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/jx-preview
   version: 0.0.116
   name: jx-preview
   namespace: jx
+  forceNamespace: ""
+  skipDeps: null
 - chart: cdf/tekton-pipeline
   version: 0.18.0-1
   name: tekton-pipeline
   namespace: tekton-pipelines
   values:
   - versionStream/charts/cdf/tekton-pipeline/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: jenkins-x/lighthouse
   version: 0.0.874
   name: lighthouse
   namespace: jx
   values:
   - versionStream/charts/jenkins-x/lighthouse/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: jenkins-x/bucketrepo
   version: 0.1.44
   name: bucketrepo
   namespace: jx
   values:
   - versionStream/charts/jenkins-x/bucketrepo/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: stable/docker-registry
   name: docker-registry
   namespace: jx
   values:
   - versionStream/charts/stable/docker-registry/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 - chart: banzaicloud-stable/vault-operator
   version: 1.3.0
   name: vault-operator
   namespace: secret-infra
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/vault-instance
   version: 1.0.1
   name: vault-instance
   namespace: secret-infra
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/pusher-wave
   version: 0.4.12
   name: pusher-wave
   namespace: secret-infra
+  forceNamespace: ""
+  skipDeps: null
 - chart: jx3/jx-build-controller
   version: 0.0.14
   name: jx-build-controller
   namespace: jx
   values:
   - versionStream/charts/jx3/jx-build-controller/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
 templates: {}
 missingFileHandler: ""
+renderedvalues: {}
