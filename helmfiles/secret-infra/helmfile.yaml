@@ -1,0 +1,40 @@
+filepath: ""
+environments:
+  default:
+    values:
+    - ../../jx-values.yaml
+    - ../../versionStream/src/fake-secrets.yaml.gotmpl
+namespace: secret-infra
+repositories:
+- name: external-secrets
+  url: https://external-secrets.github.io/kubernetes-external-secrets
+- name: banzaicloud-stable
+  url: https://kubernetes-charts.banzaicloud.com
+- name: jx3
+  url: https://storage.googleapis.com/jenkinsxio/charts
+releases:
+- chart: external-secrets/kubernetes-external-secrets
+  version: 5.2.0
+  name: kubernetes-external-secrets
+  values:
+  - ../../versionStream/charts/external-secrets/kubernetes-external-secrets/values.yaml.gotmpl
+  forceNamespace: ""
+  skipDeps: null
+- chart: banzaicloud-stable/vault-operator
+  version: 1.3.0
+  name: vault-operator
+  forceNamespace: ""
+  skipDeps: null
+- chart: jx3/vault-instance
+  version: 1.0.1
+  name: vault-instance
+  forceNamespace: ""
+  skipDeps: null
+- chart: jx3/pusher-wave
+  version: 0.4.12
+  name: pusher-wave
+  forceNamespace: ""
+  skipDeps: null
+templates: {}
+missingFileHandler: ""
+renderedvalues: {}
