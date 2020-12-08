@@ -2,8 +2,7 @@ filepath: ""
 environments:
   default:
     values:
-    - ../../jx-values.yaml
-    - ../../versionStream/src/fake-secrets.yaml.gotmpl
+    - jx-values.yaml
 namespace: secret-infra
 repositories:
 - name: external-secrets
@@ -18,21 +17,28 @@ releases:
   name: kubernetes-external-secrets
   values:
   - ../../versionStream/charts/external-secrets/kubernetes-external-secrets/values.yaml.gotmpl
+  - jx-values.yaml
   forceNamespace: ""
   skipDeps: null
 - chart: banzaicloud-stable/vault-operator
   version: 1.3.0
   name: vault-operator
+  values:
+  - jx-values.yaml
   forceNamespace: ""
   skipDeps: null
 - chart: jx3/vault-instance
   version: 1.0.1
   name: vault-instance
+  values:
+  - jx-values.yaml
   forceNamespace: ""
   skipDeps: null
 - chart: jx3/pusher-wave
   version: 0.4.12
   name: pusher-wave
+  values:
+  - jx-values.yaml
   forceNamespace: ""
   skipDeps: null
 templates: {}
