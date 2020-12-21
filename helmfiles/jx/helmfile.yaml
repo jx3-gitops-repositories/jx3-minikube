@@ -32,7 +32,7 @@ releases:
   - ../../versionStream/charts/jx3/jx-pipelines-visualizer/values.yaml.gotmpl
   - jx-values.yaml
 - chart: jx3/jx-preview
-  version: 0.0.135
+  version: 0.0.137
   name: jx-preview
   values:
   - jx-values.yaml
@@ -54,7 +54,7 @@ releases:
   - ../../versionStream/charts/stable/docker-registry/values.yaml.gotmpl
   - jx-values.yaml
 - chart: jx3/jx-build-controller
-  version: 0.0.17
+  version: 0.0.18
   name: jx-build-controller
   values:
   - ../../versionStream/charts/jx3/jx-build-controller/values.yaml.gotmpl
