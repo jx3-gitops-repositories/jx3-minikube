@@ -35,6 +35,7 @@ jxRequirements:
   ingress:
     domain: ""
     externalDNS: false
+    kind: ingress
     namespaceSubDomain: -secret-infra.
     tls:
       email: ""
