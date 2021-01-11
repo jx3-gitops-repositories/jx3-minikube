@@ -19,12 +19,12 @@ releases:
   - ../../versionStream/charts/external-secrets/kubernetes-external-secrets/values.yaml.gotmpl
   - jx-values.yaml
 - chart: banzaicloud-stable/vault-operator
-  version: 1.3.0
+  version: 1.10.0
   name: vault-operator
   values:
   - jx-values.yaml
 - chart: jx3/vault-instance
-  version: 1.0.5
+  version: 1.0.6
   name: vault-instance
   values:
   - jx-values.yaml
