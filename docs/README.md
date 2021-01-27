@@ -81,7 +81,7 @@
 	    </tr>
     <tr>
 	      <td><a href='https://github.com/jenkins-x-charts/vault-instance' title='a chart for creating a Vault instance via the vault operator'> <img src='' width='24px' height='24px'> vault-instance </a></td>
-	      <td>1.0.6</td>
+	      <td>1.0.13</td>
 	      <td></td>
 	      <td><a href='https://github.com/jenkins-x-charts/vault-instance'>source</a></td>
 	    </tr>

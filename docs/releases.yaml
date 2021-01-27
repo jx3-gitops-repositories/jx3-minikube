@@ -141,7 +141,7 @@
     repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
     sources:
     - https://github.com/enkins-x-charts/vault-instance
-    version: 1.0.6
+    version: 1.0.13
   - apiVersion: v1
     appVersion: 0.4.12
     description: wave chart that runs on kubernetes
