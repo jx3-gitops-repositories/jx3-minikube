@@ -184,18 +184,21 @@
   path: helmfiles/secret-infra/helmfile.yaml
   releases:
   - apiVersion: v1
-    appVersion: 6.2.0
+    appVersion: 6.3.0
     description: Kubernetes External Secrets CustomResourceDefinition
     home: https://github.com/external-secrets/kubernetes-external-secrets
     keywords:
     - kubernetes-external-secrets
     - secrets
+    maintainers:
+    - name: external-secrets
+      url: https://github.com/external-secrets
     name: kubernetes-external-secrets
     repositoryName: external-secrets
-    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
+    repositoryUrl: https://external-secrets.github.io/kubernetes-external-secrets
     sources:
     - https://github.com/external-secrets/kubernetes-external-secrets
-    version: 6.2.2
+    version: 6.3.0
   - apiVersion: v2
     appVersion: 1.10.0
     dependencies:
@@ -246,18 +249,21 @@
   path: helmfiles/secret-infra/helmfile.yaml
   releases:
   - apiVersion: v1
-    appVersion: 6.2.0
+    appVersion: 6.3.0
     description: Kubernetes External Secrets CustomResourceDefinition
     home: https://github.com/external-secrets/kubernetes-external-secrets
     keywords:
     - kubernetes-external-secrets
     - secrets
+    maintainers:
+    - name: external-secrets
+      url: https://github.com/external-secrets
     name: kubernetes-external-secrets
     repositoryName: external-secrets
-    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
+    repositoryUrl: https://external-secrets.github.io/kubernetes-external-secrets
     sources:
     - https://github.com/external-secrets/kubernetes-external-secrets
-    version: 6.2.2
+    version: 6.3.0
   - apiVersion: v2
     appVersion: 1.10.0
     dependencies:
