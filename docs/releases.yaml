@@ -89,6 +89,14 @@
     sources:
     - https://github.com/jenkins-x-plugins/jx-build-controller
     version: 0.0.32
+  - apiVersion: v2
+    appVersion: 0.0.6
+    description: Local External Secrets
+    icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-platform/d273e09/images/go.png
+    name: local-external-secrets
+    repositoryName: jx3
+    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
+    version: 0.0.6
 - namespace: jx
   path: helmfiles/jx/helmfile.yaml
   releases:
@@ -180,136 +188,14 @@
     sources:
     - https://github.com/jenkins-x-plugins/jx-build-controller
     version: 0.0.32
-- namespace: secret-infra
-  path: helmfiles/secret-infra/helmfile.yaml
-  releases:
-  - apiVersion: v1
-    appVersion: 6.3.0
-    description: Kubernetes External Secrets CustomResourceDefinition
-    home: https://github.com/external-secrets/kubernetes-external-secrets
-    keywords:
-    - kubernetes-external-secrets
-    - secrets
-    maintainers:
-    - name: external-secrets
-      url: https://github.com/external-secrets
-    name: kubernetes-external-secrets
-    repositoryName: external-secrets
-    repositoryUrl: https://external-secrets.github.io/kubernetes-external-secrets
-    sources:
-    - https://github.com/external-secrets/kubernetes-external-secrets
-    version: 6.3.0
   - apiVersion: v2
-    appVersion: 1.10.0
-    dependencies:
-    - condition: etcd-operator.enabled
-      name: etcd-operator
-      repository: https://charts.helm.sh/stable
-      version: 0.11.0
-    description: A Helm chart for banzaicloud/bank-vaults Vault operator
-    home: https://banzaicloud.com/products/bank-vaults/
-    maintainers:
-    - email: info@banzaicloud.com
-      name: Banzai Cloud
-    name: vault-operator
-    repositoryName: banzaicloud-stable
-    repositoryUrl: https://kubernetes-charts.banzaicloud.com
-    sources:
-    - https://github.com/hashicorp/vault
-    - https://github.com/banzaicloud/bank-vaults
-    - https://github.com/banzaicloud/banzai-charts
-    type: application
-    version: 1.10.0
-  - apiVersion: v1
-    appVersion: v1.0.0
-    description: a chart for creating a Vault instance via the vault operator
-    home: https://github.com/jenkins-x-charts/vault-instance
-    keywords:
-    - vault
-    name: vault-instance
+    appVersion: 0.0.6
+    description: Local External Secrets
+    icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-platform/d273e09/images/go.png
+    name: local-external-secrets
     repositoryName: jx3
     repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
-    sources:
-    - https://github.com/enkins-x-charts/vault-instance
-    version: 1.0.15
-  - apiVersion: v1
-    appVersion: v0.4.0
-    description: wave chart that runs on kubernetes
-    home: https://github.com/pusher/wave
-    keywords:
-    - wave
-    - kubernetes
-    name: pusher-wave
-    repositoryName: jx3
-    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
-    sources:
-    - https://github.com/pusher/wave
-    version: 0.4.16
-- namespace: secret-infra
-  path: helmfiles/secret-infra/helmfile.yaml
-  releases:
-  - apiVersion: v1
-    appVersion: 6.3.0
-    description: Kubernetes External Secrets CustomResourceDefinition
-    home: https://github.com/external-secrets/kubernetes-external-secrets
-    keywords:
-    - kubernetes-external-secrets
-    - secrets
-    maintainers:
-    - name: external-secrets
-      url: https://github.com/external-secrets
-    name: kubernetes-external-secrets
-    repositoryName: external-secrets
-    repositoryUrl: https://external-secrets.github.io/kubernetes-external-secrets
-    sources:
-    - https://github.com/external-secrets/kubernetes-external-secrets
-    version: 6.3.0
-  - apiVersion: v2
-    appVersion: 1.10.0
-    dependencies:
-    - condition: etcd-operator.enabled
-      name: etcd-operator
-      repository: https://charts.helm.sh/stable
-      version: 0.11.0
-    description: A Helm chart for banzaicloud/bank-vaults Vault operator
-    home: https://banzaicloud.com/products/bank-vaults/
-    maintainers:
-    - email: info@banzaicloud.com
-      name: Banzai Cloud
-    name: vault-operator
-    repositoryName: banzaicloud-stable
-    repositoryUrl: https://kubernetes-charts.banzaicloud.com
-    sources:
-    - https://github.com/hashicorp/vault
-    - https://github.com/banzaicloud/bank-vaults
-    - https://github.com/banzaicloud/banzai-charts
-    type: application
-    version: 1.10.0
-  - apiVersion: v1
-    appVersion: v1.0.0
-    description: a chart for creating a Vault instance via the vault operator
-    home: https://github.com/jenkins-x-charts/vault-instance
-    keywords:
-    - vault
-    name: vault-instance
-    repositoryName: jx3
-    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
-    sources:
-    - https://github.com/enkins-x-charts/vault-instance
-    version: 1.0.15
-  - apiVersion: v1
-    appVersion: v0.4.0
-    description: wave chart that runs on kubernetes
-    home: https://github.com/pusher/wave
-    keywords:
-    - wave
-    - kubernetes
-    name: pusher-wave
-    repositoryName: jx3
-    repositoryUrl: https://storage.googleapis.com/jenkinsxio/charts
-    sources:
-    - https://github.com/pusher/wave
-    version: 0.4.16
+    version: 0.0.6
 - namespace: tekton-pipelines
   path: helmfiles/tekton-pipelines/helmfile.yaml
   releases:

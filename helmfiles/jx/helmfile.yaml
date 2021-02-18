@@ -64,5 +64,5 @@ releases:
   name: local-external-secrets
   values:
   - jx-values.yaml
-  templates: {}
+templates: {}
 renderedvalues: {}

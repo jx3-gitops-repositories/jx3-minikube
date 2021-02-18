@@ -43,7 +43,7 @@ jxRequirements:
       enabled: false
       production: false
   repository: bucketrepo
-  secretStorage: vault
+  secretStorage: local
   vault: {}
   webhook: lighthouse
 jxRequirementsIngressExternalDNS:
@@ -55,4 +55,4 @@ jxRequirementsKuberhealthy:
 jxRequirementsTLSCheck:
   enabled: false
 jxRequirementsVault:
-  enabled: true
+  enabled: false
