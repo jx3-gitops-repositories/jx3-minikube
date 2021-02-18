@@ -59,5 +59,10 @@ releases:
   values:
   - ../../versionStream/charts/jx3/jx-build-controller/values.yaml.gotmpl
   - jx-values.yaml
-templates: {}
+- chart: jx3/local-external-secrets
+  version: 0.0.6
+  name: local-external-secrets
+  values:
+  - jx-values.yaml
+  templates: {}
 renderedvalues: {}
