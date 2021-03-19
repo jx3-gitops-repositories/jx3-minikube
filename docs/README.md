@@ -35,7 +35,7 @@
     <tr>
 	      <td><a href='https://github.com/jenkins-x/jx-preview' title='This chart installs the jx-preview CRD and garbagecollection job
 '> <img src='https://raw.githubusercontent.com/jenkins-x/jenkins-x-website/master/images/logo/jenkinsx-icon-color.svg' width='24px' height='24px'> jx-preview </a></td>
-	      <td>0.0.169</td>
+	      <td>0.0.170</td>
 	      <td></td>
 	      <td><a href='https://github.com/jenkins-x/jx-preview'>source</a></td>
 	    </tr>
@@ -75,7 +75,7 @@
 		    </tr>
 	    <tr>
 	      <td><a href='https://github.com/cdfoundation/tekton-helm-chart' title='A Helm chart for Tekton Pipelines'> <img src='https://avatars2.githubusercontent.com/u/47602533' width='24px' height='24px'> tekton-pipeline </a></td>
-	      <td>0.21.1</td>
+	      <td>0.22.0</td>
 	      <td></td>
 	      <td><a href='https://github.com/cdfoundation/tekton-helm-chart'>source</a></td>
 	    </tr>
