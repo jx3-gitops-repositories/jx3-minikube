@@ -15,7 +15,7 @@ repositories:
   url: https://jenkins-x-charts.github.io/repo
 releases:
 - chart: jx3/jxboot-helmfile-resources
-  version: 1.0.45
+  version: 1.0.46
   name: jxboot-helmfile-resources
   values:
   - ../../charts/jenkins-x/jxboot-helmfile-resources/values.yaml
