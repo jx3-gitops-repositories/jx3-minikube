@@ -12,6 +12,8 @@ repositories:
 - name: twuni
   url: https://helm.twun.io
 releases:
+- chart: jxgh/lighthouse-webui-plugin
+  name: lighthouse-webui-plugin
 - chart: jxgh/jxboot-helmfile-resources
   version: 1.1.35
   name: jxboot-helmfile-resources
