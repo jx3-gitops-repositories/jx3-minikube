@@ -1,0 +1,20 @@
+# Source: lighthouse/templates/tekton-controller-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lighthouse-tekton-controller
+  labels:
+    chart: "lighthouse-1.5.11"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+  selector:
+    app: lighthouse-tekton-controller

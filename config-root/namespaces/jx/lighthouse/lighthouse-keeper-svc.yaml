@@ -1,0 +1,19 @@
+# Source: lighthouse/templates/keeper-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lighthouse-keeper
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+spec:
+  type: ClusterIP
+  selector:
+    app: lighthouse-keeper
+  ports:
+    - port: 80
+      targetPort: 8888
+      protocol: TCP
+      name: http

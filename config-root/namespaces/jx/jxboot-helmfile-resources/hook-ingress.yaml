@@ -1,0 +1,23 @@
+# Source: jxboot-helmfile-resources/templates/700-hook-ing.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  name: hook
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hook
+                port:
+                  number: 80
+            path: "/hook"
+      host: f906-2800-40-33-44ea-e5b1-5370-3fb9-16c9.sa.ngrok.io

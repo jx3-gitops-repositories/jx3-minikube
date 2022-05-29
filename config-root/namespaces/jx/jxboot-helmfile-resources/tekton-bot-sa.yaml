@@ -1,0 +1,15 @@
+# Source: jxboot-helmfile-resources/templates/build-bot-serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: "tekton-bot"
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+secrets:
+  - name: tekton-container-registry-auth
+  - name: tekton-git
+imagePullSecrets:
+  - name: "tekton-container-registry-auth"

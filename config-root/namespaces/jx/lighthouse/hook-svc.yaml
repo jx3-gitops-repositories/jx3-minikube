@@ -1,0 +1,20 @@
+# Source: lighthouse/templates/webhooks-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: hook
+  labels:
+    chart: "lighthouse-1.5.11"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: lighthouse-webhooks

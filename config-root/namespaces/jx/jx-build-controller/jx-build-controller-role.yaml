@@ -1,0 +1,53 @@
+# Source: jx-build-controller/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jx-build-controller
+  annotations:
+    meta.helm.sh/release-name: 'jx-build-controller'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+rules:
+  - apiGroups:
+      - jenkins.io
+    resources:
+      - pipelineactivities
+      - sourcerepositories
+    verbs:
+      - list
+      - get
+      - watch
+      - create
+      - update
+      - patch
+  - apiGroups:
+      - jenkins.io
+    resources:
+      - environments
+      - plugins
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - pods/log
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - tekton.dev
+    resources:
+      - pipelines
+      - pipelineruns
+      - tasks
+      - taskruns
+    verbs:
+      - get
+      - list
+      - watch

@@ -1,0 +1,22 @@
+# Source: jx-pipelines-visualizer/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jx-pipelines-visualizer
+  labels:
+    app.kubernetes.io/name: jx-pipelines-visualizer
+    app.kubernetes.io/instance: "jx-pipelines-visualizer"
+    helm.sh/chart: jx-pipelines-visualizer-1.7.5
+    app.kubernetes.io/version: "1.7.5"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'cluster'
+  annotations:
+    meta.helm.sh/release-name: 'jx-pipelines-visualizer'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: jx-pipelines-visualizer
+subjects:
+  - kind: ServiceAccount
+    name: jx-pipelines-visualizer
+    namespace: jx

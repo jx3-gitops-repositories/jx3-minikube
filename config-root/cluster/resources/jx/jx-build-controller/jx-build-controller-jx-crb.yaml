@@ -1,0 +1,18 @@
+# Source: jx-build-controller/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jx-build-controller-jx
+  namespace: jx
+  annotations:
+    meta.helm.sh/release-name: 'jx-build-controller'
+  labels:
+    gitops.jenkins-x.io/pipeline: 'cluster'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: jx-build-controller-jx
+subjects:
+  - kind: ServiceAccount
+    name: jenkins-x-controllerbuild
+    namespace: jx

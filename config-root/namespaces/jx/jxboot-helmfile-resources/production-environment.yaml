@@ -1,0 +1,18 @@
+# Source: jxboot-helmfile-resources/templates/environments.yaml
+apiVersion: jenkins.io/v1
+kind: Environment
+metadata:
+  labels:
+    env: "production"
+    team: jx
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: "production"
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+spec:
+  kind: Permanent
+  label: Production
+  order: 500
+  promotionStrategy: "Manual"
+  namespace: "jx-production"

@@ -1,0 +1,30 @@
+# Source: jx-pipelines-visualizer/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jx-pipelines-visualizer
+  labels:
+    app.kubernetes.io/name: jx-pipelines-visualizer
+    app.kubernetes.io/instance: "jx-pipelines-visualizer"
+    helm.sh/chart: jx-pipelines-visualizer-1.7.5
+    app.kubernetes.io/version: "1.7.5"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - Jenkins X Pipeline Dashboard
+    nginx.ingress.kubernetes.io/auth-secret: jx-basic-auth-htpasswd
+    nginx.ingress.kubernetes.io/auth-type: basic
+    meta.helm.sh/release-name: 'jx-pipelines-visualizer'
+  namespace: jx
+spec:
+  rules:
+    - host: dashboard-jx.192.168.64.3.nip.io
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: jx-pipelines-visualizer
+                port:
+                  name: http

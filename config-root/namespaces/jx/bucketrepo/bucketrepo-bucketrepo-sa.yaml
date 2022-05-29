@@ -1,0 +1,14 @@
+# Source: bucketrepo/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bucketrepo-bucketrepo
+  labels:
+    app: bucketrepo-bucketrepo
+    chart: "bucketrepo-0.1.67"
+    release: bucketrepo
+    heritage: Helm
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'bucketrepo'
+  namespace: jx

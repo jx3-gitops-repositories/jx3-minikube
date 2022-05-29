@@ -1,0 +1,24 @@
+# Source: tekton-pipeline/templates/feature-flags-cm.yaml
+apiVersion: v1
+data:
+  disable-affinity-assistant: "false"
+  disable-creds-init: "false"
+  disable-home-env-overwrite: "true"
+  disable-working-directory-overwrite: "true"
+  enable-api-fields: stable
+  enable-custom-tasks: "false"
+  enable-tekton-oci-bundles: "false"
+  require-git-ssh-secret-known-hosts: "false"
+  running-in-environment-with-injected-sidecars: "true"
+  scope-when-expressions-to-task: "false"
+  enable-api-fields: alpha
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/part-of: tekton-pipelines
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: feature-flags
+  namespace: tekton-pipelines
+  annotations:
+    meta.helm.sh/release-name: 'tekton-pipeline'

@@ -1,0 +1,45 @@
+# Source: lighthouse/templates/tekton-controller-role.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: lighthouse-tekton-controller
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+rules:
+  - apiGroups:
+      - tekton.dev
+    resources:
+      - pipelines
+    verbs:
+      - get
+  - apiGroups:
+      - tekton.dev
+    resources:
+      - pipelineruns
+    verbs:
+      - create
+      - list
+      - get
+      - watch
+  - apiGroups:
+      - lighthouse.jenkins.io
+    resources:
+      - lighthousebreakpoints
+      - lighthousejobs
+    verbs:
+      - get
+      - update
+      - list
+      - watch
+  - apiGroups:
+      - lighthouse.jenkins.io
+    resources:
+      - lighthousejobs/status
+    verbs:
+      - update
+      - get
+      - watch
+      - patch

@@ -1,0 +1,14 @@
+# Source: jxboot-helmfile-resources/templates/jenkins-x-docker-registry.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-x-docker-registry
+  annotations:
+    expose.config.fabric8.io/clusterip-port-if-empty-key: docker.registry
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+data:
+  kaniko.flags: "--insecure"
+  docker.registry: docker-registry

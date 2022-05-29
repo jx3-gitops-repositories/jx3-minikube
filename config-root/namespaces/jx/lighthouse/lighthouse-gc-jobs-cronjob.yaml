@@ -1,0 +1,48 @@
+# Source: lighthouse/templates/gc-jobs-cj.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: lighthouse-gc-jobs
+  labels:
+    app: jenkins-x-lighthouse-gcjobs
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      backoffLimit: 6
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: lighthouse-gc-jobs
+            release: lighthouse
+        spec:
+          containers:
+            - command:
+                - /home/jx/gc-jobs
+              image: ghcr.io/jenkins-x/lighthouse-gc-jobs:1.5.11
+              imagePullPolicy: IfNotPresent
+              args:
+                - "--namespace=jx"
+                - "--max-age=168h"
+              name: lighthouse-gc-jobs
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          serviceAccountName: lighthouse-gc-jobs
+  successfulJobsHistoryLimit: 3
+  schedule: "0/30 * * * *"
+  startingDeadlineSeconds: 4000
+  suspend: false

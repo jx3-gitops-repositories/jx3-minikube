@@ -32,16 +32,20 @@ jxRequirements:
     provider: minikube
   environments:
   - key: dev
+    owner: frandelgado
+    repository: jx3-minikube-1
   - key: staging
   - key: production
   ingress:
-    domain: change.me
+    domain: 192.168.64.3.nip.io
     kind: ingress
     namespaceSubDomain: -jx.
     tls:
       email: ""
       enabled: false
       production: false
+  pipelineUser:
+    username: frandelgado
   repository: bucketrepo
   secretStorage: local
   vault: {}

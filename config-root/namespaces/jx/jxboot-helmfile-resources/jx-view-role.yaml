@@ -1,0 +1,31 @@
+# Source: jxboot-helmfile-resources/templates/jx-view-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jx-view
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+rules:
+  - apiGroups:
+      - jenkins.io
+    resources:
+      - teams
+    verbs:
+      - list
+      - get
+  - apiGroups:
+      - jenkins.io
+    resources:
+      - environments
+    verbs:
+      - list
+      - get
+  - apiGroups:
+      - prow.k8s.io
+    resources:
+      - prowjobs
+    verbs:
+      - create

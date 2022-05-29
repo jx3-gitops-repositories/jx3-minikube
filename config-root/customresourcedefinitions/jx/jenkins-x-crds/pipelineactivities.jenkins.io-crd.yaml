@@ -1,0 +1,302 @@
+# Source: jenkins-x-crds/templates/pipelineactivities-crd.yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+    meta.helm.sh/release-name: 'jenkins-x-crds'
+  creationTimestamp: null
+  name: pipelineactivities.jenkins.io
+  labels:
+    gitops.jenkins-x.io/pipeline: 'customresourcedefinitions'
+spec:
+  group: jenkins.io
+  names:
+    categories:
+      - all
+    kind: PipelineActivity
+    listKind: PipelineActivityList
+    plural: pipelineactivities
+    shortNames:
+      - activity
+      - act
+      - pa
+    singular: pipelineactivity
+  scope: Namespaced
+  preserveUnknownFields: false
+  versions:
+    - additionalPrinterColumns:
+        - description: The URL of the Git repository
+          jsonPath: .spec.gitUrl
+          name: Git URL
+          type: string
+        - description: The status of the pipeline
+          jsonPath: .spec.status
+          name: Status
+          type: string
+      name: v1
+      schema:
+        openAPIV3Schema:
+          description: PipelineActivity represents pipeline activity for a particular run of a pipeline
+          properties:
+            apiVersion:
+              description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+              type: string
+            kind:
+              description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+              type: string
+            metadata:
+              type: object
+            spec:
+              description: PipelineActivitySpec is the specification of the pipeline activity
+              properties:
+                attachments:
+                  items:
+                    properties:
+                      name:
+                        type: string
+                      urls:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  type: array
+                author:
+                  type: string
+                authorAvatarURL:
+                  type: string
+                authorURL:
+                  type: string
+                baseSHA:
+                  type: string
+                batchPipelineActivity:
+                  description: BatchPipelineActivity contains information about a batch build, used by both the batch build and its comprising PRs for linking them together
+                  properties:
+                    batchBranchName:
+                      type: string
+                    batchBuildNumber:
+                      type: string
+                    pullRequestInfo:
+                      items:
+                        description: PullRequestInfo contains information about a PR included in a batch, like its PR number, the last build number, and SHA
+                        properties:
+                          lastBuildNumberForCommit:
+                            description: LastBuildNumberForCommit is the number of the last successful build of this PR outside of a batch
+                            type: string
+                          lastBuildSHA:
+                            description: LastBuildSHA is the commit SHA in the last successful build of this PR outside of a batch.
+                            type: string
+                          pullRequestNumber:
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                build:
+                  type: string
+                buildLogsUrl:
+                  type: string
+                buildUrl:
+                  type: string
+                completedTimestamp:
+                  format: date-time
+                  nullable: true
+                  type: string
+                context:
+                  type: string
+                gitBranch:
+                  type: string
+                gitOwner:
+                  type: string
+                gitRepository:
+                  type: string
+                gitUrl:
+                  type: string
+                lastCommitMessage:
+                  type: string
+                lastCommitSHA:
+                  type: string
+                lastCommitURL:
+                  type: string
+                pipeline:
+                  type: string
+                pullTitle:
+                  type: string
+                releaseNotesURL:
+                  type: string
+                startedTimestamp:
+                  format: date-time
+                  nullable: true
+                  type: string
+                status:
+                  description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                  type: string
+                steps:
+                  items:
+                    description: PipelineActivityStep represents a step in a pipeline activity
+                    properties:
+                      kind:
+                        description: ActivityStepKindType is a kind of step
+                        type: string
+                      preview:
+                        description: PreviewActivityStep is the step of creating a preview environment as part of a Pull Request pipeline
+                        properties:
+                          applicationURL:
+                            type: string
+                          completedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          description:
+                            type: string
+                          environment:
+                            type: string
+                          name:
+                            type: string
+                          pullRequestURL:
+                            type: string
+                          startedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          status:
+                            description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                            type: string
+                        type: object
+                      promote:
+                        description: PromoteActivityStep is the step of promoting a version of an application to an environment
+                        properties:
+                          applicationURL:
+                            type: string
+                          completedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          description:
+                            type: string
+                          environment:
+                            type: string
+                          name:
+                            type: string
+                          pullRequest:
+                            description: PromotePullRequestStep is the step for promoting a version to an environment by raising a Pull Request on the git repository of the environment
+                            properties:
+                              completedTimestamp:
+                                format: date-time
+                                nullable: true
+                                type: string
+                              description:
+                                type: string
+                              mergeCommitSHA:
+                                type: string
+                              name:
+                                type: string
+                              pullRequestURL:
+                                type: string
+                              startedTimestamp:
+                                format: date-time
+                                nullable: true
+                                type: string
+                              status:
+                                description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                                type: string
+                            type: object
+                          startedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          status:
+                            description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                            type: string
+                          update:
+                            description: PromoteUpdateStep is the step for updating a promotion after the Pull Request merges to master
+                            properties:
+                              completedTimestamp:
+                                format: date-time
+                                nullable: true
+                                type: string
+                              description:
+                                type: string
+                              name:
+                                type: string
+                              startedTimestamp:
+                                format: date-time
+                                nullable: true
+                                type: string
+                              status:
+                                description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                                type: string
+                              statuses:
+                                items:
+                                  description: GitStatus the status of a git commit in terms of CI/CD
+                                  properties:
+                                    status:
+                                      type: string
+                                    url:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
+                      stage:
+                        description: StageActivityStep represents a stage of zero to more sub steps in a jenkins pipeline
+                        properties:
+                          completedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          description:
+                            type: string
+                          name:
+                            type: string
+                          startedTimestamp:
+                            format: date-time
+                            nullable: true
+                            type: string
+                          status:
+                            description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                            type: string
+                          steps:
+                            items:
+                              description: CoreActivityStep is a base step included in Stages of a pipeline or other kinds of step
+                              properties:
+                                completedTimestamp:
+                                  format: date-time
+                                  nullable: true
+                                  type: string
+                                description:
+                                  type: string
+                                name:
+                                  type: string
+                                startedTimestamp:
+                                  format: date-time
+                                  nullable: true
+                                  type: string
+                                status:
+                                  description: ActivityStatusType is the status of an activity; usually succeeded or failed/error on completion
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                    type: object
+                  type: array
+                version:
+                  type: string
+              type: object
+              x-kubernetes-preserve-unknown-fields: true
+            status:
+              description: PipelineActivityStatus is the status for an Environment resource
+              properties:
+                version:
+                  type: string
+              type: object
+          type: object
+      served: true
+      storage: true
+      subresources:
+        status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

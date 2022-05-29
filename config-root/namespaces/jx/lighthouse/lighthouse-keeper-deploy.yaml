@@ -1,0 +1,97 @@
+# Source: lighthouse/templates/keeper-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lighthouse-keeper
+  labels:
+    chart: "lighthouse-1.5.11"
+    app: lighthouse-keeper
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+    wave.pusher.com/update-on-config-change: 'true'
+  namespace: jx
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: lighthouse-keeper
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/keeper.logs: '[{"source":"lighthouse","service":"keeper"}]'
+        prometheus.io/port: "9090"
+        prometheus.io/scrape: "true"
+        jenkins-x.io/hash: 'c0272472bd8ad5d5938c575aaaa24a51bfcafefeb872035bbfaec48e2760c49b'
+      labels:
+        app: lighthouse-keeper
+    spec:
+      serviceAccountName: lighthouse-keeper
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: lighthouse-keeper
+          image: ghcr.io/jenkins-x/lighthouse-keeper:1.5.11
+          imagePullPolicy: IfNotPresent
+          args:
+            - "--namespace=jx"
+          ports:
+            - name: http
+              containerPort: 8888
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+          env:
+            - name: "GIT_KIND"
+              value: "github"
+            - name: "GIT_SERVER"
+              value: "https://github.com"
+            - name: "GIT_USER"
+              value: frandelgado
+            - name: "GIT_TOKEN"
+              valueFrom:
+                secretKeyRef:
+                  name: lighthouse-oauth-token
+                  key: oauth
+            - name: "JX_LOG_FORMAT"
+              value: "json"
+            - name: "LOGRUS_FORMAT"
+              value: "json"
+            - name: LOGRUS_SERVICE
+              value: "lighthouse"
+            - name: LOGRUS_SERVICE_VERSION
+              value: "1.5.11"
+            - name: LOGRUS_STACK_SKIP
+              value: ""
+            - name: "LIGHTHOUSE_KEEPER_STATUS_CONTEXT_LABEL"
+              value: "Lighthouse Merge Status"
+            - name: LIGHTHOUSE_TRIGGER_ON_MISSING
+              value: "enable"
+          envFrom:
+            - secretRef:
+                name: jx-boot-job-env-vars
+                optional: true
+          resources:
+            limits:
+              cpu: 400m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi

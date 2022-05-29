@@ -1,0 +1,10 @@
+# Source: lighthouse/templates/tekton-controller-sa.yaml
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: lighthouse-tekton-controller
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'

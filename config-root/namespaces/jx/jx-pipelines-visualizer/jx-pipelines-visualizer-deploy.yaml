@@ -1,0 +1,73 @@
+# Source: jx-pipelines-visualizer/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jx-pipelines-visualizer
+  labels:
+    app.kubernetes.io/name: jx-pipelines-visualizer
+    app.kubernetes.io/instance: "jx-pipelines-visualizer"
+    helm.sh/chart: jx-pipelines-visualizer-1.7.5
+    app.kubernetes.io/version: "1.7.5"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'jx-pipelines-visualizer'
+    wave.pusher.com/update-on-config-change: 'true'
+  namespace: jx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jx-pipelines-visualizer
+      app.kubernetes.io/instance: "jx-pipelines-visualizer"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jx-pipelines-visualizer
+        app.kubernetes.io/instance: "jx-pipelines-visualizer"
+        helm.sh/chart: jx-pipelines-visualizer-1.7.5
+        app.kubernetes.io/version: "1.7.5"
+        app.kubernetes.io/managed-by: "Helm"
+    spec:
+      containers:
+        - name: jx-pipelines-visualizer
+          image: "ghcr.io/jenkins-x/jx-pipelines-visualizer:1.7.5"
+          args:
+            - -namespace
+            - jx
+            - -resync-interval
+            - 60s
+            - -pipeline-trace-url-template
+            - http://grafana-jx-observability.192.168.64.3.nip.io/explore?left=%5B%22now%22,%22now%22,%22Tempo%22,%7B%22query%22:%22{{.TraceID}}%22%7D%5D
+            - -log-level
+            - INFO
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          volumeMounts:
+            - mountPath: /secrets/git
+              name: secrets-git
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512M
+            requests:
+              cpu: "0.2"
+              memory: 128M
+      securityContext:
+        fsGroup: 1000
+      serviceAccountName: jx-pipelines-visualizer
+      enableServiceLinks: false
+      volumes:
+        - name: secrets-git
+          secret:
+            defaultMode: 420
+            secretName: tekton-git

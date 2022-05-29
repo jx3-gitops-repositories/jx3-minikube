@@ -1,0 +1,40 @@
+# Source: jx-preview/templates/gc-jobs-role.yaml
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: jx-preview-gc-jobs
+  annotations:
+    meta.helm.sh/release-name: 'jx-preview'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+      - delete
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - preview.jenkins.io
+    resources:
+      - previews
+    verbs:
+      - create
+      - delete
+      - list
+      - update
+      - get
+      - watch
+      - patch

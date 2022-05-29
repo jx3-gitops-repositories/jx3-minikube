@@ -1,0 +1,49 @@
+# Source: jx-preview/templates/gc-jobs-cj.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: jx-preview-gc-jobs
+  labels:
+    app: jenkins-x-lighthouse-gcjobs
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'jx-preview'
+  namespace: jx
+spec:
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: jx-preview-gc-jobs
+            release: jx-preview
+        spec:
+          containers:
+            - command:
+                - /bin/sh
+                - -c
+                - jx gitops git setup --namespace jx --secret tekton-git --git-provider https://github.com && jx preview gc
+              env:
+                - name: XDG_CONFIG_HOME
+                  value: /home
+              image: ghcr.io/jenkins-x-plugins/jx-preview:0.0.192
+              imagePullPolicy: IfNotPresent
+              name: jx-preview-gc-jobs
+              resources: {}
+              terminationMessagePath: /dev/termination-log
+              terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          serviceAccountName: jx-preview-gc-jobs
+  successfulJobsHistoryLimit: 3
+  schedule: "*/10 * * * *"
+  startingDeadlineSeconds: 4000
+  suspend: false

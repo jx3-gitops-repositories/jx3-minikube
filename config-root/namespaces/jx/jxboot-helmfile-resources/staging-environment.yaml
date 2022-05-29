@@ -1,0 +1,18 @@
+# Source: jxboot-helmfile-resources/templates/environments.yaml
+apiVersion: jenkins.io/v1
+kind: Environment
+metadata:
+  labels:
+    env: "staging"
+    team: jx
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: "staging"
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+spec:
+  kind: Permanent
+  label: Staging
+  namespace: jx-staging
+  promotionStrategy: "Auto"
+  order: 100

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  labels:
+    name: jx-staging
+    gitops.jenkins-x.io/pipeline: 'cluster'
+    team: 'jx'
+  name: jx-staging
+spec: {}
+status: {}

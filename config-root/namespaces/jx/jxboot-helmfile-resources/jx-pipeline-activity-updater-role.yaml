@@ -1,0 +1,17 @@
+# Source: jxboot-helmfile-resources/templates/jx-pipeline-activity-reporter-role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: jx-pipeline-activity-updater
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+rules:
+  - apiGroups:
+      - jenkins.io
+    resources:
+      - '*'
+    verbs:
+      - '*'

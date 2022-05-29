@@ -1,0 +1,18 @@
+# Source: jxboot-helmfile-resources/templates/jx-gcactivities-rb.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gcactivities
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gcactivities
+subjects:
+  - kind: ServiceAccount
+    name: jx-gcactivities
+    namespace: jx

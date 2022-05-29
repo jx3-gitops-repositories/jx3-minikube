@@ -1,0 +1,18 @@
+# Source: jxboot-helmfile-resources/templates/build-bot-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: "tekton-bot"
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: "tekton-bot"
+subjects:
+  - kind: ServiceAccount
+    name: "tekton-bot"
+    namespace: jx

@@ -1,0 +1,34 @@
+# Source: jxboot-helmfile-resources/templates/kapp-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kapp-config
+  labels:
+    kapp.k14s.io/config: ""
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'jxboot-helmfile-resources'
+  namespace: jx
+data:
+  config.yml: |
+    apiVersion: kapp.k14s.io/v1alpha1
+    kind: Config
+
+    changeRuleBindings:
+    - rules:
+      - "upsert after upserting apps.jenkins-x.io/ingress-nginx"
+      resourceMatchers:
+      - apiVersionKindMatcher: {kind: Ingress, apiVersion: networking.k8s.io/v1beta1}
+
+    - rules:
+      - "delete before deleting apps.jenkins-x.io/pusher-wave"
+      resourceMatchers:
+      - andMatcher:
+          matchers:
+            - apiVersionKindMatcher: {kind: Deployment, apiVersion: apps/v1}
+            - notMatcher:
+                matcher:
+                  hasAnnotationMatcher:
+                    keyvalues:
+                    - key: kapp.k14s.io/change-group
+                      value: apps.jenkins-x.io/pusher-wave

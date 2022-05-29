@@ -1,0 +1,64 @@
+apiVersion: v1
+data:
+  plugins.yaml: |
+    approve:
+    - lgtm_acts_as_approve: true
+      repos:
+      - frandelgado/jx3-minikube-1
+      require_self_approval: true
+    cat: {}
+    cherry_pick_unapproved: {}
+    config_updater:
+      gzip: false
+      maps:
+        env/prow/job.yaml:
+          name: config
+        env/prow/plugins.yaml:
+          name: plugins
+    external_plugins:
+      frandelgado/jx3-minikube-1:
+      - endpoint: http://cd-indicators.jx.svc.cluster.local/lighthouse/events
+        name: cd-indicators
+      - endpoint: http://lighthouse-webui-plugin.jx.svc.cluster.local/lighthouse/events
+        name: lighthouse-webui-plugin
+    heart: {}
+    label:
+      additional_labels: null
+    owners: {}
+    plugins:
+      frandelgado/jx3-minikube-1:
+      - config-updater
+      - approve
+      - assign
+      - blunderbuss
+      - help
+      - hold
+      - lgtm
+      - lifecycle
+      - override
+      - size
+      - trigger
+      - wip
+      - heart
+      - cat
+      - dog
+      - pony
+    requiresig: {}
+    sigmention: {}
+    size:
+      l: 0
+      m: 0
+      s: 0
+      xl: 0
+      xxl: 0
+    triggers:
+    - repos:
+      - frandelgado/jx3-minikube-1
+      trusted_org: todo
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: plugins
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'

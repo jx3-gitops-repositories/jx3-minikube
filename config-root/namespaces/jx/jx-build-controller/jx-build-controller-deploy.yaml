@@ -1,0 +1,85 @@
+# Source: jx-build-controller/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jx-build-controller
+  labels:
+    app: jx-build-controller
+    chart: jx-build-controller-0.3.9
+    release: jx-build-controller
+    heritage: Helm
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'jx-build-controller'
+    wave.pusher.com/update-on-config-change: 'true'
+  namespace: jx
+spec:
+  selector:
+    matchLabels:
+      app: jx-build-controller
+      release: jx-build-controller
+  template:
+    metadata:
+      labels:
+        app: jx-build-controller
+        release: jx-build-controller
+    spec:
+      restartPolicy: Always
+      serviceAccountName: jenkins-x-controllerbuild
+      containers:
+        - name: jx-build-controller
+          command: [jx-build-controller]
+          imagePullPolicy:
+          image: "ghcr.io/jenkins-x/jx-build-controller:0.3.9"
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+          env:
+            - name: JX_LOG_FORMAT
+              value: "json"
+            - name: JX_LOG_LEVEL
+              value: "info"
+            - name: JX_LOG_SERVICE
+              value: "jx-build-controller"
+            - name: JX_LOG_SERVICE_VERSION
+              value: "0.3.9"
+            - name: JX_LOG_STACK_SKIP
+              value: ""
+            - name: GIT_SECRET_MOUNT_PATH
+              value: /secrets/git
+            - name: GIT_AUTHOR_EMAIL
+              value: jenkins-x@googlegroups.com
+            - name: GIT_AUTHOR_NAME
+              value: jenkins-x-bot
+            - name: GIT_SECRET_SERVER
+              value: https://github.com
+            - name: TRACES_EXPORTER_ENDPOINT
+              value: tempo.jx-observability:14268
+            - name: TRACES_EXPORTER_TYPE
+              value: jaeger:http:thrift
+            - name: XDG_CONFIG_HOME
+              value: /tmp/git-creds
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 80m
+              memory: 128Mi
+          volumeMounts:
+            - mountPath: /secrets/git
+              name: secrets-git
+      volumes:
+        - name: secrets-git
+          secret:
+            defaultMode: 420
+            secretName: tekton-git
