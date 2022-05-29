@@ -1,0 +1,21 @@
+# Source: lighthouse-webui-plugin/templates/pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lighthouse-webui-plugin
+  labels:
+    app.kubernetes.io/name: lighthouse-webui-plugin
+    app.kubernetes.io/instance: "lighthouse-webui-plugin"
+    helm.sh/chart: lighthouse-webui-plugin-0.1.7
+    app.kubernetes.io/version: "0.1.7"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse-webui-plugin'
+  namespace: jx
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"

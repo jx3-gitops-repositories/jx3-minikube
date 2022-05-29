@@ -8,6 +8,7 @@ data:
     in_repo_config:
       enabled:
         frandelgado/jx3-minikube-1: true
+        frandelgado/spring-boot-jsx-demo: true
     plank: {}
     pod_namespace: jx
     prowjob_namespace: jx
@@ -20,6 +21,7 @@ data:
         skip-unknown-contexts: false
       merge_method:
         frandelgado/jx3-minikube-1: merge
+        frandelgado/spring-boot-jsx-demo: merge
       queries:
       - labels:
         - approved
@@ -31,6 +33,7 @@ data:
         - needs-rebase
         repos:
         - frandelgado/jx3-minikube-1
+        - frandelgado/spring-boot-jsx-demo
       - labels:
         - updatebot
         missingLabels:
@@ -41,6 +44,7 @@ data:
         - needs-rebase
         repos:
         - frandelgado/jx3-minikube-1
+        - frandelgado/spring-boot-jsx-demo
       target_url: http://lighthouse-jx.192.168.64.3.nip.io/merge/status
 kind: ConfigMap
 metadata:

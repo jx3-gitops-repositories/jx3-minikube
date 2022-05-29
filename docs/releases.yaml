@@ -2,6 +2,20 @@
   path: helmfiles/jx/helmfile.yaml
   releases:
   - apiVersion: v1
+    appVersion: 0.1.7
+    description: Web UI for Lighthouse, to visualize events, jobs, and merge status/history.
+    firstDeployed: "2022-05-29T18:56:11Z"
+    home: https://github.com/jenkins-x-plugins/lighthouse-webui-plugin
+    icon: https://raw.githubusercontent.com/jenkins-x/jenkins-x-website/master/images/logo/jenkinsx-icon-color.svg
+    lastDeployed: "2022-05-29T18:56:11Z"
+    name: lighthouse-webui-plugin
+    repositoryName: jxgh
+    repositoryUrl: https://jenkins-x-charts.github.io/repo
+    resourcePath: config-root/namespaces/jx/lighthouse-webui-plugin
+    sources:
+    - https://github.com/jenkins-x-plugins/lighthouse-webui-plugin
+    version: 0.1.7
+  - apiVersion: v1
     appVersion: 1.1.35
     description: A Helm chart for the resources for JX Boot
     firstDeployed: "2022-05-29T17:00:39Z"

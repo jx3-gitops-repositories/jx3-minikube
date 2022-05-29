@@ -1,0 +1,23 @@
+# Source: lighthouse-webui-plugin/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: lighthouse-webui-plugin
+  labels:
+    app.kubernetes.io/name: lighthouse-webui-plugin
+    app.kubernetes.io/instance: "lighthouse-webui-plugin"
+    helm.sh/chart: lighthouse-webui-plugin-0.1.7
+    app.kubernetes.io/version: "0.1.7"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'cluster'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse-webui-plugin'
+rules:
+  - apiGroups:
+      - lighthouse.jenkins.io
+    resources:
+      - lighthousejobs
+    verbs:
+      - list
+      - watch
+      - get

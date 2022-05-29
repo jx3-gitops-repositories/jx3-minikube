@@ -1,0 +1,92 @@
+# Source: lighthouse-webui-plugin/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lighthouse-webui-plugin
+  labels:
+    app.kubernetes.io/name: lighthouse-webui-plugin
+    app.kubernetes.io/instance: "lighthouse-webui-plugin"
+    helm.sh/chart: lighthouse-webui-plugin-0.1.7
+    app.kubernetes.io/version: "0.1.7"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    meta.helm.sh/release-name: 'lighthouse-webui-plugin'
+    wave.pusher.com/update-on-config-change: 'true'
+  namespace: jx
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: lighthouse-webui-plugin
+      app.kubernetes.io/instance: "lighthouse-webui-plugin"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: lighthouse-webui-plugin
+        app.kubernetes.io/instance: "lighthouse-webui-plugin"
+        helm.sh/chart: lighthouse-webui-plugin-0.1.7
+        app.kubernetes.io/version: "0.1.7"
+        app.kubernetes.io/managed-by: "Helm"
+    spec:
+      containers:
+        - name: lighthouse-webui-plugin
+          image: "ghcr.io/jenkins-x/lighthouse-webui-plugin:0.1.7"
+          args:
+            - -namespace
+            - jx
+            - -resync-interval
+            - 60s
+            - -keeper-endpoint
+            - http://lighthouse-keeper.jx
+            - -keeper-sync-interval
+            - 60s
+            - -event-trace-url-template
+            - http://grafana-jx-observability.192.168.64.3.nip.io/explore?left=%5B%22now%22,%22now%22,%22Tempo%22,%7B%22query%22:%22{{.TraceID}}%22%7D%5D
+            - -log-level
+            - INFO
+            - -store-data-path
+            - "/data"
+            - -store-max-events
+            - "1000"
+            - -store-events-max-age
+            - "0"
+          env:
+            - name: XDG_CONFIG_HOME
+              value: /home/jenkins
+            - name: LIGHTHOUSE_HMAC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: hmac
+                  name: lighthouse-hmac-token
+          volumeMounts:
+            - name: data
+              mountPath: "/data"
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            tcpSocket:
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512M
+            requests:
+              cpu: "0.2"
+              memory: 128M
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: lighthouse-webui-plugin
+      securityContext:
+        fsGroup: 1000
+      serviceAccountName: lighthouse-webui-plugin
+      enableServiceLinks: false

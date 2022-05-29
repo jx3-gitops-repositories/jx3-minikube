@@ -1,0 +1,30 @@
+# Source: lighthouse-webui-plugin/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lighthouse-webui-plugin
+  labels:
+    app.kubernetes.io/name: lighthouse-webui-plugin
+    app.kubernetes.io/instance: "lighthouse-webui-plugin"
+    helm.sh/chart: lighthouse-webui-plugin-0.1.7
+    app.kubernetes.io/version: "0.1.7"
+    app.kubernetes.io/managed-by: "Helm"
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-realm: Authentication Required - Jenkins X Lighthouse Dashboard
+    nginx.ingress.kubernetes.io/auth-secret: jx-basic-auth-htpasswd
+    nginx.ingress.kubernetes.io/auth-type: basic
+    meta.helm.sh/release-name: 'lighthouse-webui-plugin'
+  namespace: jx
+spec:
+  rules:
+    - host: lighthouse-jx.192.168.64.3.nip.io
+      http:
+        paths:
+          - pathType: ImplementationSpecific
+            backend:
+              service:
+                name: lighthouse-webui-plugin
+                port:
+                  name: http

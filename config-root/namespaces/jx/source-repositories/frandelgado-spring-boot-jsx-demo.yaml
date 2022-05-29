@@ -1,0 +1,22 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: frandelgado
+    provider: github
+    repository: spring-boot-jsx-demo
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+  name: frandelgado-spring-boot-jsx-demo
+  namespace: jx
+spec:
+  httpCloneURL: https://github.com/frandelgado/spring-boot-jsx-demo.git
+  org: frandelgado
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: spring-boot-jsx-demo
+  scheduler:
+    kind: ""
+    name: in-repo
+  url: https://github.com/frandelgado/spring-boot-jsx-demo
