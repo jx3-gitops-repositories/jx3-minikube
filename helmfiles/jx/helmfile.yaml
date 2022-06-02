@@ -9,6 +9,8 @@ repositories:
   url: https://charts.helm.sh/stable
 - name: jxgh
   url: https://jenkins-x-charts.github.io/repo
+- name: twuni
+  url: https://helm.twun.io
 releases:
 - chart: jxgh/jxboot-helmfile-resources
   version: 1.1.112
@@ -46,7 +48,7 @@ releases:
   values:
   - ../../versionStream/charts/jxgh/bucketrepo/values.yaml.gotmpl
   - jx-values.yaml
-- chart: stable/docker-registry
+- chart: twuni/docker-registry
   name: docker-registry
   values:
   - ../../versionStream/charts/stable/docker-registry/values.yaml.gotmpl
