@@ -54,7 +54,7 @@ releases:
   - ../../versionStream/charts/stable/docker-registry/values.yaml.gotmpl
   - jx-values.yaml
 - chart: jxgh/jx-build-controller
-  version: 0.4.6
+  version: 0.4.7
   name: jx-build-controller
   values:
   - ../../versionStream/charts/jxgh/jx-build-controller/values.yaml.gotmpl
