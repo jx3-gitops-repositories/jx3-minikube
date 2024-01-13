@@ -11,7 +11,7 @@ repositories:
   url: https://helm.twun.io
 releases:
 - chart: jxgh/jxboot-helmfile-resources
-  version: 1.1.356
+  version: 1.1.357
   name: jxboot-helmfile-resources
   values:
   - ../../charts/jenkins-x/jxboot-helmfile-resources/values.yaml
