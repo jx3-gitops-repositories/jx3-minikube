@@ -11,7 +11,7 @@ repositories:
   url: https://helm.twun.io
 releases:
 - chart: jxgh/jxboot-helmfile-resources
-  version: 1.1.431
+  version: 1.1.435
   name: jxboot-helmfile-resources
   values:
   - ../../charts/jenkins-x/jxboot-helmfile-resources/values.yaml
@@ -24,7 +24,7 @@ releases:
   - ../../versionStream/charts/jxgh/jenkins-x-crds/values.yaml.gotmpl
   - jx-values.yaml
 - chart: jxgh/jx-pipelines-visualizer
-  version: 1.8.2
+  version: 1.8.4
   name: jx-pipelines-visualizer
   values:
   - ../../versionStream/charts/jxgh/jx-pipelines-visualizer/values.yaml.gotmpl
@@ -53,7 +53,7 @@ releases:
   - jx-values.yaml
   - ../../versionStream/charts/twuni/docker-registry/values.yaml.gotmpl
 - chart: jxgh/jx-build-controller
-  version: 0.5.13
+  version: 0.5.15
   name: jx-build-controller
   values:
   - ../../versionStream/charts/jxgh/jx-build-controller/values.yaml.gotmpl
