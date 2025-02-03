@@ -49,7 +49,6 @@ releases:
 - chart: twuni/docker-registry
   name: docker-registry
   values:
-  - ../../versionStream/charts/stable/docker-registry/values.yaml.gotmpl
   - jx-values.yaml
   - ../../versionStream/charts/twuni/docker-registry/values.yaml.gotmpl
 - chart: jxgh/jx-build-controller
