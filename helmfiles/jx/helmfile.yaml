@@ -1,8 +1,8 @@
-filepath: ""
 environments:
   default:
     values:
     - jx-values.yaml
+---
 namespace: jx
 repositories:
 - name: jxgh
@@ -11,7 +11,7 @@ repositories:
   url: https://helm.twun.io
 releases:
 - chart: jxgh/jxboot-helmfile-resources
-  version: 1.1.524
+  version: 1.1.532
   name: jxboot-helmfile-resources
   values:
   - ../../charts/jenkins-x/jxboot-helmfile-resources/values.yaml
@@ -52,7 +52,7 @@ releases:
   - jx-values.yaml
   - ../../versionStream/charts/twuni/docker-registry/values.yaml.gotmpl
 - chart: jxgh/jx-build-controller
-  version: 0.5.30
+  version: 0.5.31
   name: jx-build-controller
   values:
   - ../../versionStream/charts/jxgh/jx-build-controller/values.yaml.gotmpl
@@ -62,5 +62,3 @@ releases:
   name: local-external-secrets
   values:
   - jx-values.yaml
-templates: {}
-renderedvalues: {}
