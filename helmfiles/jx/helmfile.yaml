@@ -52,7 +52,7 @@ releases:
   - jx-values.yaml
   - ../../versionStream/charts/twuni/docker-registry/values.yaml.gotmpl
 - chart: jxgh/jx-build-controller
-  version: 0.5.32
+  version: 0.5.33
   name: jx-build-controller
   values:
   - ../../versionStream/charts/jxgh/jx-build-controller/values.yaml.gotmpl
